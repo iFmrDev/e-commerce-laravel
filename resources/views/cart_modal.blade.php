@@ -24,6 +24,7 @@
                 <form id="checkout" class="card p-2" method="POST" >
                 {{-- <form id="checkout" class="card p-2" method="POST" action=" {{ route('getInvoice') }}"> --}}
                     @csrf
+                    <input type="hidden" name="discount" id="discount" value="0" />
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">بيانات العميل</span>                
                     </h4>
@@ -97,6 +98,7 @@
             $( '#name-error' ).html("");
             $( '#address-error' ).html("");
             $( '#email-error' ).html("");
+            $( '#discount-error' ).html("");
             
             $.ajax({
                 url:"{{ route('getInvoice')}}",
@@ -112,6 +114,9 @@
                         }
                         if(data.errors.address){
                             $( '#address-error' ).html( data.errors.address[0] );
+                        }
+                        if(data.errors.discount){
+                            $( '#discount-error' ).html( data.errors.discount[0] );
                         }
                         
                     }else{
@@ -132,6 +137,11 @@
         });
     });
 
+    $('body').on('blur', '#discout_tb', function(e){        
+        $('#discount').val($(this).val());
+        let $total = $('#total_tb').text()
+        $('#total_tb').text(parseFloat($total) - parseFloat($(this).val()))
+    })
     
     function printInvoice(content){
         var printWin = window.open("","processPrint");

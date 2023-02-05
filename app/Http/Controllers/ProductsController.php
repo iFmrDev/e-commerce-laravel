@@ -43,16 +43,16 @@ class ProductsController extends Controller
 
     public function getProduct(){
         $products = Product::get();
-        $cartCount = Cart::count();  
+        $cartCount = Cart::where('user_id', auth()->user()->id)->where('status' , true)->count();  
               
         return view('products', ['products'=> $products, 'cartCount' => $cartCount]);
     }
 
     public function addProductCart($product_id){
         $user_id = auth()->user()->id;
-        $cart = Cart::where('product_id',$product_id)->first();
+        $cart = Cart::where('user_id', auth()->user()->id)->where('product_id',$product_id)->first();
         if (is_null($cart)) {
-            Cart::create(['user_id' => $user_id, 'product_id' => $product_id,'qty' => 1]);
+            Cart::create(['user_id' => $user_id, 'product_id' => $product_id,'qty' => 1, 'status' => true]);
         } else {
             Cart::where('user_id', $user_id)->where('product_id', $product_id)->increment('qty');
         }
@@ -63,12 +63,12 @@ class ProductsController extends Controller
     }
 
     public static function getCart(){
-        $cart = Cart::with('products')->get();
+        $cart = Cart::where('user_id', auth()->user()->id)->where('status' , true)->with('products')->get();
         return view('cart_content', compact('cart'));
     }
 
     public static function getCartInvoice(){
-        $cart = Cart::with('products')->get();
+        $cart = Cart::where('user_id', auth()->user()->id)->with('products')->get();
         return view('cart_content_invoice', compact('cart'));
     }
 
@@ -81,9 +81,9 @@ class ProductsController extends Controller
     public function checkoutProduct($id){
         
         $product = DB::table('products')->find($id);
-        
+        $cartCount = Cart::where('user_id', auth()->user()->id)->where('status' , true)->count(); 
         // return Response()->json($product); 
-        return view('checkout',  ['product'=> $product]);
+        return view('checkout',  ['product'=> $product , 'cartCount' => $cartCount]);
     }
 
     public function getInvoice(Request $request){
@@ -91,20 +91,36 @@ class ProductsController extends Controller
             'name' => 'required|min:3|max:255',
             'address' => 'required|min:6|max:255',
             'email' => 'required|email|max:255',
+            'discount' => 'required',
         ]);
 
         if ($validator->passes()) {
             return view('invoice', ['name'=> $request->name,'address'=> $request->address,'email'=> $request->email ]);
         }else{
             Alert::toast('لإتمام عملية الشراء الرجاء استكمال الحقول المطلوبة.', 'warning');
-            // return redirect()->back()->with([
-            //     'code' => 1,
-            // ]);
-            // return redirect()->back();
-            
             return Response::json(['errors' => $validator->errors()]);
         }
         // print('Name: ' . $Request->Name . "<br> Address: " . $Request->Address . "<br> Email: " . $Request->Email);
     }
+
+    // public function getInv(Request $request){
+    //     $row =  [
+    //         'coustomer_name' => $request->name,
+    //         'product_name' => $request->productName,
+    //         'price' => $request->price,
+    //         'qty' => 1,
+    //         'vat' => $request->price * 0.15,
+    //         'total' => $request->price + $request->price * 0.15,
+    //         'discount' => 0,
+    //         'net' => $request->price + $request->price * 0.15,
+    //     ];
+
+    //     $inv = DB::table('invoices')->insert($row);
+    //     $lastRow = DB::table('invoices')->order_by('created_at', 'desc')->first();
+        
+    //     return view('', ['data', $lastRow]);
+
+    //     // print('Name: ' . $Request->Name . "<br> Address: " . $Request->Address . "<br> Email: " . $Request->Email);
+    // }
 }
 

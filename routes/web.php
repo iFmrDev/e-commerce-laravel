@@ -24,6 +24,9 @@ Route::post('invoice', [ProductsController::class, 'getInvoice'])->middleware(['
 Route::get('listcart', [ProductsController::class, 'getCart'])->middleware(['auth'])->name('cart');
 Route::get('cart/delet/{id}', [ProductsController::class, 'deleteItemCart'])->middleware(['auth'])->name('deleteItemCart');
 
+// Route::get('checkout', [ProductsController::class, 'checkoutProduct'])->name('checkoutProduct');
+// Route::post('inv', [ProductsController::class, 'getInv'])->name('getInv');
+
 Route::get('/about', function () {
     $cartCount = Cart::count();  
     return view('about', [ 'cartCount' => $cartCount]);
@@ -36,7 +39,6 @@ Auth::routes();
 // Route::get('products/create', [ProductsController::class, 'store'])->name('create_product');
 // Route::get('products/getProduct', [ProductsController::class, 'getProduct'])->name('getProduct');
 // Route::get('phones', [PhoneController::class, 'index'])->name('phones');
-// Route::get('checkout', [ProductsController::class, 'checkoutProduct'])->name('checkoutProduct');
 
 
 // Route::get('cart', function () {

@@ -67,7 +67,7 @@
                         </li>
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link  text-success" href="#" data-bs-toggle="modal" data-bs-target="#cartModal"> <i class="fas fa-shopping-cart text-success" value="{{ $cartCount }}"></i> سلة المشتريات</a>                        
+                                <a class="nav-link  text-success" href="#" data-bs-toggle="modal" {{ $cartCount > 0 ? 'data-bs-target=#cartModal' : '' }}> <i class="fas fa-shopping-cart text-success" value="{{ $cartCount }}"></i> سلة المشتريات</a>                        
                             </li> 
                         @else
                             <li class="nav-item">

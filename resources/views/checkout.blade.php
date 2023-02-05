@@ -29,6 +29,9 @@
             <form class="card p-2" method="POST" action=" {{route('getInvoice') }}">
                 @csrf
             
+                <input type="hidden" name="productName" value="{{ $product->name }}" />
+                <input type="hidden" name="price" value="{{ $product->price}}" />
+
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">بيانات العميل</span>                
                 </h4>
@@ -52,8 +55,6 @@
                         <input type="Email" name="Email" class="form-control" id="inputEmail">
                     </div>
                 </div>
-                      
-                
                 
                 <div class="input-group">
                     <div class="input-group-append">

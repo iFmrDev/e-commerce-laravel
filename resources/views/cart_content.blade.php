@@ -1,4 +1,4 @@
-<div class="container border rounded">
+<div class="container border rounded table-responsive">
     <table class="table align-middle">
         <thead>
             <tr>
@@ -45,8 +45,37 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="bold fs-4 text-success">الإجمالي : </td>
-                <td class="bold fs-4 text-dark"> {{ $total }} ر.س</td>
+                <td class="bold fs-6 text-success">إجمالي الضريبة : </td>
+                <td class="bold fs-6 text-dark"> {{ $total * 0.15}} ر.س</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="bold fs-6 text-success">قيمة الخصم : </td>
+                <td class="bold fs-6 text-dark">
+                    <div class="w-50 d-flex">
+                        <input  type="text" name="discout_tb" id="discout_tb" value="{{ old('discount') ?? '0' }}" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"><span class="mx-2"> ر.س</span>
+                    </div>
+                    <span class="text-danger">
+                    <strong id="discount-error"></strong>
+                </span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="bold fs-6 text-success">الإجمالي : </td>
+                <td class="bold fs-6 text-dark" id="total_tb"> {{ $total }} ر.س</td>
                 <td></td>
             </tr>
         </tfoot>

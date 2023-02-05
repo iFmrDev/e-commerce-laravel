@@ -25,6 +25,7 @@ return [
     'remember_me' => 'تذكرني',
     'forgot_your_password' => 'نسيت كلمة المرور؟',
     'register' => 'تسجيل',
+    'new_register' => 'تسجيل جديد',
     'msg_confirm_password' => 'يرجى تأكيد كلمة المرور قبل المتابعة.',
     'reset_password' => 'إعادة تعيين كلمة المرور' ,
     'send_password_reset_link' => 'إرسال رابط إعادة تعيين كلمة المرور',
