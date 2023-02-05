@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="Container p-5">
+    <div class="Container p-3">
       <div class="row justify-content-center" >
             @foreach ($products as $item)
                 <div class="col-sm-6 col-md-6 col-xl-4 mb-4" >              

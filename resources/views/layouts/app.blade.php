@@ -22,7 +22,7 @@
             font-family: 'Cairo';
         }
         main{
-            min-height: 600px;
+            min-height: 550px;
         }
         .nav-link:hover{
             color: #2d2d2f !important;
