@@ -43,7 +43,7 @@ class ProductsController extends Controller
 
     public function getProduct(){
         $products = Product::get();
-        $cartCount = Cart::where('user_id', auth()->user()->id)->where('status' , true)->count();  
+        $cartCount = auth()->user() ? Cart::where('user_id', auth()->user()->id)->where('status' , true)->count() : 0;  
               
         return view('products', ['products'=> $products, 'cartCount' => $cartCount]);
     }
@@ -63,7 +63,7 @@ class ProductsController extends Controller
     }
 
     public static function getCart(){
-        $cart = Cart::where('user_id', auth()->user()->id)->where('status' , true)->with('products')->get();
+        $cart = auth()->user() ? Cart::where('user_id', auth()->user()->id)->where('status' , true)->with('products')->get() : [];
         return view('cart_content', compact('cart'));
     }
 

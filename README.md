@@ -1,3 +1,11 @@
+# e-commerce-laravel
+This e-commerce Arabic RTL template should help get you started developing with Laravel & bootstrap 5 in Vite.
+
+![alt text](https://github.com/iFmrDev/e-commerce-laravel/blob/main/public/images/screen_shot.png?raw=true)
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
